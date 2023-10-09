@@ -1,23 +1,49 @@
-import fetchBreeds from './cat-api';
-import fetchCatByBreed from './cat-api';
-import Notiflix from 'notiflix';
-import SlimSelect from 'slim-select';
-import axios from "axios";
+import { fetchBreeds, fetchCatByBreed } from "./cat-api";
+import Notiflix from "notiflix";
 
-const refs = {
-    breedselect: document.querySelector('.breed-select'),
-    loader: document.querySelector('.loader'),
-    error: document.querySelector('.error'),
-    catinfo: document.querySelector('.cat-info'),
-    jsloader: document.querySelector('.js-loader'),
-};
+const breedSelect = document.querySelector(".breed-select");
+const catInfo = document.querySelector(".cat-info");
+const loader = document.querySelector(".loader");
 
-refs.select.addEventListener('change', handselect);
-refs.select.hidden = true;
-refs.error.hidden = true;
-refs.loader.hidden = false;
-refs.jsloader.hidden = false;
+breedSelect.addEventListener("change", fetchCatInfo);
 
+fetchBreeds()
+    .then((data) => renderMarkup(data))
+    .catch(() => {
+        Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
+    });
 
+function renderMarkup(data) {
+    breedSelect.classList.remove("hidden");
+    loader.classList.add("hidden");
+    breedSelect.innerHTML = data.reduce((html, el) => {
+        return html + `<option value="${el.id}">${el.name}</option>`
+    }, "");
+}
 
+function fetchCatInfo() {
+    catInfo.classList.add("hidden");
+    loader.classList.remove("hidden");
+    const selectedValue = breedSelect.value;
+    fetchCatByBreed(selectedValue)
+        .then((data) => renderCatInfo(data))
+        .catch(() => {
+            Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
+        });
+}
+
+function renderCatInfo(data) {
+    catInfo.classList.remove("hidden");
+    loader.classList.add("hidden");
+    const name = data[0].breeds[0].name;
+    const description = data[0].breeds[0].description;
+    const temperament = data[0].breeds[0].temperament;
+    const markup = `<img src="${data[0].url}" alt="${name}" width="350">
+    <div>
+    <h3>${name}</h3>
+        <p>${description}</p>
+        <p><span class="temper">Temperament: </span>${temperament}</p>
+        </div>`
+    catInfo.innerHTML = markup;
+}
 

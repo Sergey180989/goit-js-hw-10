@@ -1,21 +1,24 @@
 import axios from "axios";
+import Notiflix from "notiflix";
 
-axios.defaults.headers.common['x-api-key'] = APIkey;
+axios.defaults.baseURL = 'https://api.thecatapi.com/v1/';
+axios.defaults.headers.common["x-api-key"] = "live_rnU55rCXqKPD83Egmapcdap90VKAblzQGTKZl8H3JKOckJcU60JEOZSi2DteHMrS";
 
-const APIkey = 'live_vIIpCY7JYs7i7OrCqWJPM2cnJjMXJtLhWqLDzpnRB4GYbvmpMH2ohwsgNhQJI9a5';
-const beginurl = 'https://api.thecatapi.com/v1/breeds';
-const searchurl = 'https://api.thecatapi.com/v1/images/search';
-
-export function fetchBreeds () {
-    const url = '${beginurl}?api_key'
-    return axios.get(url).then(response => {
-        return response.data;
-    })    
-}
+export function fetchBreeds() {
+    return axios.get('breeds')
+    .then(response => {
+      return response.data;
+    })
+    }
 
 export function fetchCatByBreed(breedId) {
-    const url = '${searchurl}?api_key&breed_ids=${breedId}'
-    return axios.get(url).then(response => {
-        return response.data;
-    })    
-}
+    return axios.get(`images/search?breed_ids=${breedId}`)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
+    });
+    }
+
+
