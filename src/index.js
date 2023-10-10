@@ -47,3 +47,5 @@ function renderCatInfo(data) {
     catInfo.innerHTML = markup;
 }
 
+
+

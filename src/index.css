@@ -1,18 +1,13 @@
 .breed-select {
-
   margin-bottom: 20px;
 }
 
-
-
 .cat-info {
-
   display: flex;
   gap: 20px;
 }
 
 .temper {
-
   font-weight: 700;
 }
 
@@ -76,15 +71,6 @@
 }
 
 .hidden {
-
   display: none;
 }
 
-
-.custom-select-container {
-  position: relative;
-  display: inline-block;
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 4px;
-}
