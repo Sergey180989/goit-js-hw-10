@@ -9,6 +9,9 @@ export function fetchBreeds() {
     .then(response => {
       return response.data;
     })
+    .catch(error => {
+        throw error;
+      });
     }
 
 export function fetchCatByBreed(breedId) {
