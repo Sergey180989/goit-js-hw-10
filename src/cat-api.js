@@ -2,7 +2,7 @@ import axios from "axios";
 import Notiflix from "notiflix";
 
 axios.defaults.baseURL = 'https://api.thecatapi.com/v1/';
-axios.defaults.headers.common["x-api-key"] = "live_rnU55rCXqKPD83Egmapcdap90VKAblzQGTKZl8H3JKOckJcU60JEOZSi2DteHMrS";
+axios.defaults.headers.common["x-api-key"] = "live_vIIpCY7JYs7i7OrCqWJPM2cnJjMXJtLhWqLDzpnRB4GYbvmpMH2ohwsgNhQJI9a5";
 
 export function fetchBreeds() {
     return axios.get('breeds')
