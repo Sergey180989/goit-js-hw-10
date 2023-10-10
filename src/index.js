@@ -25,10 +25,13 @@ function fetchCatInfo() {
     catInfo.classList.add("hidden");
     loader.classList.remove("hidden");
     const selectedValue = breedSelect.value;
+    
     fetchCatByBreed(selectedValue)
-        .then((data) => renderCatInfo(data))
+        .then((data) => renderCatInfo(data))            
         .catch(() => {
+            catInfo.innerHTML = "";
             Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
+            
         });
 }
 
