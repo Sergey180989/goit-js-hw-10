@@ -1,5 +1,6 @@
 import axios from "axios";
 import Notiflix from "notiflix";
+import SlimSelect from 'slim-select'
 
 axios.defaults.baseURL = 'https://api.thecatapi.com/v1/';
 axios.defaults.headers.common["x-api-key"] = "live_vIIpCY7JYs7i7OrCqWJPM2cnJjMXJtLhWqLDzpnRB4GYbvmpMH2ohwsgNhQJI9a5";
